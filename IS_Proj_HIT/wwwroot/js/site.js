@@ -45,7 +45,7 @@ $(function(){
         messages: {
             FirstName: {
                 required: "Please provide a first name",
-                alphabetsnspace: "First name must be equal to MRn"
+                alphabetsnspace: "First name must be all letters"
             },
             lastName: {
                 required: "Please provide a last name",
