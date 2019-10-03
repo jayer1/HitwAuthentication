@@ -8,13 +8,13 @@
         <input asp-for="@Model.Mrn" name="Mrn" placeholder="ABC321" maxlength="6" />
         <br />
         <label>First Name</label>
-        <input asp-for="@Model.FirstName" name="FirstName" placeholder="John" />
+        <input asp-for="@Model.FirstName" pattern="[A-Za-z]" name="FirstName" placeholder="John" />
         <br />
         <label>Middle Initial</label>
         <input asp-for="@Model.MiddleName" name="Middle" placeholder="X" maxlength="1" />
         <br />
         <label>Last Name</label>
-        <input asp-for="@Model.LastName" name="lastName" placeholder="Smith" />
+        <input asp-for="@Model.LastName" pattern="[A-Za-z]" name="lastName" placeholder="Smith" />
         <br />
         <label>Alias First Name</label>
         <input asp-for="@Model.AliasFirstName" name="aliasFirstName" placeholder="John" />

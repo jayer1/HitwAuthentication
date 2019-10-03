@@ -5,7 +5,11 @@
 
 $(function(){
     console.log('Hi');
-    $("#patient").validate({
+
+    $.validator.addMethod("alphabetsnspace", function (value, element) {
+        return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
+    });
+    $("form[name='patient']").validate({
         // Specify validation rules
         rules: {
             // The key name on the left side is the name attribute
@@ -17,18 +21,18 @@ $(function(){
             },
             FirstName: {
                 required: true,
-                lettersonly: true
+                alphabetsnspace: true
             },
-            Middle: "letterswithbasicpunc",
+            Middle: "alphabetsnspace",
             lastName: {
                 required: true,
-                lettersonly: true
+                alphabetsnspace: true
             },
-            aliasFirstName: "lettersonly",
-            aliasMiddleName: "lettersonly",
-            aliasLastName: "lettersonly",
-            MaidenName: "lettersonly",
-            MothersMaidenName: "lettersonly",
+            aliasFirstName: "alphabetsnspace",
+            aliasMiddleName: "alphabetsnspace",
+            aliasLastName: "alphabetsnspace",
+            MaidenName: "alphabetsnspace",
+            MothersMaidenName: "alphabetsnspace",
             Dob: "required",
             Ssn: {
                 required: true,
@@ -41,11 +45,11 @@ $(function(){
         messages: {
             FirstName: {
                 required: "Please provide a first name",
-                letters: "First name must be equal to MRn"
+                alphabetsnspace: "First name must be equal to MRn"
             },
             lastName: {
                 required: "Please provide a last name",
-                lettersonly: "Last name must be all letters"
+                alphabetsnspace: "Last name must be all letters"
             },
             Ssn: {
                 required: "Please provide a Social Security Number",
