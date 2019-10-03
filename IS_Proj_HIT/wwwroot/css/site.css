@@ -7,8 +7,26 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-select {
+/*select {
     width: 200px;
+}*/
+
+.shadebox {
+    //border: 1px solid black;
+    background-color: darkseagreen;
+    padding: 5px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dropdowns {
+    max-width: 300px;
+}
+
+#mrn {
+    text-align: center;
+    border: 1px solid black
 }
 
 /* Sticky footer styles
