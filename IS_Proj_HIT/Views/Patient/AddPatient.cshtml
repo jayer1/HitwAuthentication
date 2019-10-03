@@ -1,0 +1,72 @@
+﻿@model IS_Proj_HIT.Models.Patient
+<link rel="stylesheet" href="~/css/forms.css" />
+<div class="bg-primary m-1 p-1 text-white"><h4>Add Patient</h4></div>
+<div class="list-group">
+    <form method="post" id="patient" name="patient" asp-action="AddPatient">
+        <div asp-validation-summary="All"></div>
+        <label>MRN</label>
+        <input asp-for="@Model.Mrn" name="Mrn" placeholder="ABC321" maxlength="6" />
+        <br />
+        <label>First Name</label>
+        <input asp-for="@Model.FirstName" name="FirstName" placeholder="John" />
+        <br />
+        <label>Middle Initial</label>
+        <input asp-for="@Model.MiddleName" name="Middle" placeholder="X" maxlength="1" />
+        <br />
+        <label>Last Name</label>
+        <input asp-for="@Model.LastName" name="lastName" placeholder="Smith" />
+        <br />
+        <label>Alias First Name</label>
+        <input asp-for="@Model.AliasFirstName" name="aliasFirstName" placeholder="John" />
+        <br />
+        <label>Alias Middle Initial</label>
+        <input asp-for="@Model.AliasMiddleName" name="aliasMiddleName" placeholder="X" maxlength="1" />
+        <br />
+        <label>Alias Last Name</label>
+        <input asp-for="@Model.AliasLastName" name="aliasLastName" placeholder="Smith" />
+        <br />
+        <label>Maiden Name</label>
+        <input asp-for="@Model.MaidenName" name="MaidenName" placeholder="Smith" />
+        <br />
+        <label>Mother's Maiden Name</label>
+        <input asp-for="@Model.MothersMaidenName" name="MothersMaidenName" placeholder="Smith" />
+        <br />
+        <label for="interp">Interpreter Needed?</label>
+        <input id="interp" asp-for="@Model.InterpreterNeeded" placeholder="30000" />
+        <br />
+        <label>SSN</label>
+        <input asp-for="@Model.Ssn" name="Ssn" type="password" maxlength="9" />
+        <br />
+        <label>DOB</label>
+        <input type="date" asp-for="@Model.Dob" name="Dob" placeholder="30000" />
+        <br />
+        <label>Marital Status</label>
+        <select class="form-control dropdowns" asp-for="@Model.MaritalStatusId" asp-items="ViewBag.MaritalStatus"></select>
+        <br />
+        <label>Ethnicity ID</label>
+        <select class="form-control dropdowns" asp-for="@Model.EthnicityId" asp-items="ViewBag.Ethnicity"></select>
+        <br />
+        <label>Religion</label>
+        <select class="form-control dropdowns" asp-for="@Model.ReligionId" asp-items="ViewBag.Religions"></select>
+        <br />
+        <label>Sex</label>
+        <select class="form-control dropdowns" asp-for="@Model.SexId" asp-items="ViewBag.Sexes"></select>
+        <br />
+        <label>Gender</label>
+        <select class="form-control dropdowns" asp-for="@Model.GenderId" asp-items="ViewBag.Gender"></select>
+        <br />
+        <label for="deceased">Deceased</label>
+        <input id="deceased" asp-for="@Model.DeceasedLiving" />
+        <br />
+        <input asp-for="@Model.LastModified" type="text" readonly hidden value="@(ViewBag.LastModified ?? String.Empty)" />
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+<hr />
+<a asp-action="Index">Home</a>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"</script>
+
