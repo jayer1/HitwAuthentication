@@ -15,8 +15,11 @@ namespace isprojectHiT.Models
         IQueryable<Religion> Religions { get; }
         IQueryable<MaritalStatus> MaritalStatuses { get; }
         IQueryable<Patient> Patients { get; }
+        IQueryable<Employment> Employments { get; }
 
         void AddPatient(Patient patient);
+
+        void AddEmployment(Employment employment);
 
     }
 }

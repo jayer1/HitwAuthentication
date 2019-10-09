@@ -26,6 +26,14 @@ namespace isprojectHiT.Models
 
         public IQueryable<MaritalStatus> MaritalStatuses => context.MaritalStatus;
 
+        public IQueryable<Employment> Employments => context.Employment;
+
+        public void AddEmployment(Employment employment)
+        {
+            context.Add(employment);
+            context.SaveChanges();
+        }
+
         public void AddPatient(Patient patient)
         {
             context.Add(patient);

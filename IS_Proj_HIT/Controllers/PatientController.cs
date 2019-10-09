@@ -51,11 +51,11 @@ namespace IS_Proj_HIT.Controllers
                                      Text = m.Name
                                  }).ToList();
 
-            ViewBag.Modified = repository.MaritalStatuses.Select(m =>
+            ViewBag.Employment = repository.Employments.Select(e =>
                                 new SelectListItem
                                 {
-                                    Value = m.MaritalStatusId.ToString(),
-                                    Text = m.Name
+                                    Value = e.EmploymentId.ToString(),
+                                    Text = ("Employer Name: " + e.EmployerName + " Occupation: " + e.Occupation).ToString()
                                 }).ToList();
 
             return View();
@@ -68,6 +68,7 @@ namespace IS_Proj_HIT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddPatient(Patient model)
         {
+            //ViewBag.LastModified = DateTime.Today.AddYears(-1);
             if (ModelState.IsValid)
             {
                 if (repository.Patients.Any(p => p.Mrn == model.Mrn))
@@ -86,6 +87,38 @@ namespace IS_Proj_HIT.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult AddEmployment()
+        {
+            ViewBag.LastModified = DateTime.Today.AddYears(-1);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddEmployment(Employment model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (repository.Employments.Any(e => e.EmploymentId == model.EmploymentId))
+                {
+                    ModelState.AddModelError("", "Employment ID must be unique");
+                }
+                else
+                {
+                    model.LastModified = @DateTime.Now;
+                    repository.AddEmployment(model);
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
+        }
+
+        public IActionResult AddEmploymentToPatient()
+        {
+            
             return View();
         }
     }
