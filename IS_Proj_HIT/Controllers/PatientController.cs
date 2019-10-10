@@ -55,9 +55,8 @@ namespace IS_Proj_HIT.Controllers
                                 new SelectListItem
                                 {
                                     Value = e.EmploymentId.ToString(),
-                                    Text = ("Employer Name: " + e.EmployerName + " Occupation: " + e.Occupation).ToString()
+                                    Text = (e.EmployerName + " - " + e.Occupation).ToString()
                                 }).ToList();
-
             return View();
 
         }

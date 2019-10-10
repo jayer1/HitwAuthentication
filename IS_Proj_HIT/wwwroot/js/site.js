@@ -9,12 +9,30 @@ $(function(){
     $.validator.addMethod("alphabetsnspace", function (value, element) {
         return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
     });
+
+    // Check for DOB of less that today's date
+    $.validator.addMethod("maxDate", function (value, element) {
+        var curDate = new Date();
+        var inputDate = new Date(value);
+        if (inputDate < curDate)
+            return true;
+        return false;
+    }, "Invalid Date from the future!");   // error message
+
+    // Check for DOB of 100 years before this year
+    $.validator.addMethod("minDate", function (value, element) {
+        var testYear = (new Date).getFullYear();
+        var testDate = new Date((testYear - 100), 1, 1);
+        var inputDate = new Date(value);
+        if (inputDate > testDate)
+            return true;
+        return false;
+    }, "Too far in the past!");   // error message
+
+
     $("form[name='patient']").validate({
         // Specify validation rules
         rules: {
-            // The key name on the left side is the name attribute
-            // of an input field. Validation rules are defined
-            // on the right side
             Mrn: {
                 required: true,
                 minlength: 6
@@ -33,7 +51,12 @@ $(function(){
             aliasLastName: "alphabetsnspace",
             MaidenName: "alphabetsnspace",
             MothersMaidenName: "alphabetsnspace",
-            Dob: "required",
+            Dob: {
+                required: true,
+                date: true,
+                maxDate: true,
+                minDate: true
+            },
             Ssn: {
                 required: true,
                 minlength: 9,
@@ -62,6 +85,51 @@ $(function(){
             aliasLastName: "Only letters allowed",
             MothersMaidenName: "Only letters allowed",
             MaidenName: "Only letters allowed"
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+
+    $("form[name='employment']").validate({
+        // Specify validation rules
+        rules: {
+            employerName: {
+                required: true
+            },
+            address: {
+                required: true
+            },
+            PhoneNumber: {
+                required: true,
+                number: true,
+                maxlength: 10,
+                minlength: 10
+
+            },
+            occupation: {
+                required: true
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            employerName: {
+                required: "Please provide an Employer Name"
+            },
+            address: {
+                required: "Please provide an address"
+            },
+            PhoneNumber: {
+                required: "Please provide a phone number",
+                number: "Must be a 10 digit number starting with 1",
+                minlength: "Too short - make it a 10 digit number",
+                maxlength: "Too long - make it a 10 digit number"
+            },
+            occupation: {
+                required: "Please provide an occupation"
+            }
         },
         // Make sure the form is submitted to the destination defined
         // in the "action" attribute of the form when valid
