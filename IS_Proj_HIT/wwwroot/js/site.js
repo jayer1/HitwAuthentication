@@ -35,13 +35,14 @@ $(function(){
         rules: {
             Mrn: {
                 required: true,
-                minlength: 6
+                minlength: 6,
+                maxlength:6
             },
             FirstName: {
                 required: true,
                 alphabetsnspace: true
             },
-            Middle: "alphabetsnspace",
+            MiddleName: "alphabetsnspace",
             lastName: {
                 required: true,
                 alphabetsnspace: true
@@ -66,6 +67,12 @@ $(function(){
         },
         // Specify validation error messages
         messages: {
+            Mrn: {
+                required: "Please provide an MRN with 6 digits",
+                minlength: "The MRN must be  6 digits long",
+                maxlength: "The MRN must be  6 digits long"
+            },
+            
             FirstName: {
                 required: "Please provide a first name",
                 alphabetsnspace: "First name must be all letters"
@@ -79,7 +86,7 @@ $(function(){
                 minlength: "Your SSN must be at least 10 digits long",
                 number: "SSN should be numeric"
             },
-            Middle: "Only one letter allowed",
+            MiddleName: "Only one letter allowed",
             aliasFirstName: "Only letters allowed",
             aliasMiddleName: "Only letters allowed",
             aliasLastName: "Only letters allowed",
@@ -98,13 +105,14 @@ $(function(){
         rules: {
             Mrn: {
                 required: true,
-                minlength: 6
+                minlength: 6,
+                maxlength:6
             },
             FirstName: {
                 required: true,
                 alphabetsnspace: true
             },
-            Middle: "alphabetsnspace",
+            MiddleName: "alphabetsnspace",
             lastName: {
                 required: true,
                 alphabetsnspace: true
@@ -142,7 +150,7 @@ $(function(){
                 minlength: "Your SSN must be at least 10 digits long",
                 number: "SSN should be numeric"
             },
-            Middle: "Only one letter allowed",
+            MiddleName: "Only one letter allowed",
             aliasFirstName: "Only letters allowed",
             aliasMiddleName: "Only letters allowed",
             aliasLastName: "Only letters allowed",
