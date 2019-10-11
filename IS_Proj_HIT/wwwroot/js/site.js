@@ -5,7 +5,7 @@
 
 $(function(){
     console.log('Hi');
-
+    
     $.validator.addMethod("alphabetsnspace", function (value, element) {
         return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
     });
@@ -28,7 +28,7 @@ $(function(){
             return true;
         return false;
     }, "Too far in the past!");   // error message
-
+    
 
     $("form[name='patient']").validate({
         // Specify validation rules

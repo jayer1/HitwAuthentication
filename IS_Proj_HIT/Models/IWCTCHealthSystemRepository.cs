@@ -18,6 +18,8 @@ namespace isprojectHiT.Models
         IQueryable<Employment> Employments { get; }
 
         void AddPatient(Patient patient);
+        void DeletePatient(Patient patient);
+        void EditPatient(Patient patient);
 
         void AddEmployment(Employment employment);
 

@@ -1,7 +1,57 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@using IS_Proj_HIT.Models
+@model IEnumerable<Patient>
+
+
+<div class="bg-primary m-1 p-1 text-white"><h4>Patient Listing</h4></div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="AddPatient">Add Patient</a></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="AddEmployment">Add Employee</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="navbar-collapse collapse d-sm-inline-flex">
+    <ul class="navbar-nav nav">
+            <li></li>
+            <li></li>
+    </ul>
+</div>
+@if (Model.Count() == 1)
+{
+    <p>There are no patients</p>
 }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">MRN</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle Intial</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Patient patient in Model)
+            {
+            <tr>
 
-<h1>Index</h1>
+                <td>@patient.Mrn</td>
+                <td>@patient.FirstName</td>
+                <td>@patient.MiddleName</td>
+                <td>@patient.LastName</td>
+                <td>@patient.Dob.ToShortDateString()</td>
+                @*<td>@Html.ActionLink("Edit", "Edit", new { id = patient.Mrn })</td>*@
+                <td><a asp-action="Edit" asp-route-id="@patient.Mrn">Edit</a></td>
+                <td><a asp-action="DeletePatient" asp-route-id="@patient.Mrn">Delete</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
 
+}
+<hr />

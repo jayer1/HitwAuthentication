@@ -39,5 +39,25 @@ namespace isprojectHiT.Models
             context.Add(patient);
             context.SaveChanges();
         }
+
+        public void DeletePatient(Patient patient)
+        {
+            context.Remove(patient);
+            context.SaveChanges();
+        }
+
+        public void EditPatient(Patient patient)
+        {
+            /*if (patient.Mrn == 0)
+            {
+                context.Patient.Add(patient);
+            }
+            else
+            {*/
+                context.Update(patient);
+            //}
+
+            context.SaveChanges();
+        }
     }
 }

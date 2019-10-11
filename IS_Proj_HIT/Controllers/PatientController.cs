@@ -13,6 +13,9 @@ namespace IS_Proj_HIT.Controllers
     {
         private IWCTCHealthSystemRepository repository;
         public PatientController(IWCTCHealthSystemRepository repo) => repository = repo;
+
+        public IActionResult Index() => View(repository.Patients);
+
         public IActionResult AddPatient() {
 
             ViewBag.LastModified = DateTime.Today.AddYears(-1);
@@ -84,9 +87,10 @@ namespace IS_Proj_HIT.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult DeletePatient(string id)
         {
-            return View();
+            repository.DeletePatient(repository.Patients.FirstOrDefault(b => b.Mrn == id));
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddEmployment()
@@ -115,10 +119,73 @@ namespace IS_Proj_HIT.Controllers
             return View();
         }
 
-        public IActionResult AddEmploymentToPatient()
+        // Pick record to send to edit page
+        public IActionResult Edit(string id)
         {
-            
+            ViewBag.LastModified = DateTime.Today.AddYears(-1);
+            ViewBag.LastModified = DateTime.Today.AddYears(-1);
+            ViewBag.Religions = repository.Religions.Select(r =>
+                                 new SelectListItem
+                                 {
+                                     Value = r.ReligionId.ToString(),
+                                     Text = r.Name
+                                 }).ToList();
+
+            ViewBag.Sexes = repository.Sexes.Select(s =>
+                                 new SelectListItem
+                                 {
+                                     Value = s.SexId.ToString(),
+                                     Text = s.Name
+                                 }).ToList();
+
+            ViewBag.Gender = repository.Genders.Select(g =>
+                                 new SelectListItem
+                                 {
+                                     Value = g.GenderId.ToString(),
+                                     Text = g.Name
+                                 }).ToList();
+
+            ViewBag.Ethnicity = repository.Ethnicities.Select(e =>
+                                 new SelectListItem
+                                 {
+                                     Value = e.EthnicityId.ToString(),
+                                     Text = e.Name
+                                 }).ToList();
+
+            ViewBag.MaritalStatus = repository.MaritalStatuses.Select(m =>
+                                 new SelectListItem
+                                 {
+                                     Value = m.MaritalStatusId.ToString(),
+                                     Text = m.Name
+                                 }).ToList();
+
+            ViewBag.Employment = repository.Employments.Select(e =>
+                                new SelectListItem
+                                {
+                                    Value = e.EmploymentId.ToString(),
+                                    Text = (e.EmployerName + " - " + e.Occupation).ToString()
+                                }).ToList();
+
+            return View(repository.Patients.FirstOrDefault(p => p.Mrn == id));
+
+        }
+
+        // Save edits to data in edit page
+        [HttpPost]
+        [ActionName("Update")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Patient model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.LastModified = @DateTime.Now;
+                repository.EditPatient(model);
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
+
+       
     }
 }
