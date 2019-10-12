@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IS_Proj_HIT.Models;
+using IS_Proj_HIT.Models.ViewModels;
 using isprojectHiT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,13 +13,37 @@ namespace IS_Proj_HIT.Controllers
     public class PatientController : Controller
     {
         private IWCTCHealthSystemRepository repository;
+
+        public int PageSize = 4;
         public PatientController(IWCTCHealthSystemRepository repo) => repository = repo;
 
-        public IActionResult Index() => View(repository.Patients);
+        //public IActionResult Index() => View(repository.Patients);
+
+        public ViewResult Index(int patientPage = 1) => View(new ListPatientsViewModel
+        {
+            Patients = repository.Patients
+                .OrderBy(p => p.FirstName)
+                .Skip((patientPage - 1) * PageSize)
+                .Take(PageSize),
+            PagingInfo = new PagingInfo
+            {
+                CurrentPage = patientPage,
+                ItemsPerPage = PageSize,
+                TotalItems = repository.Patients.Count()
+            }
+        });
+
 
         public IActionResult AddPatient() {
 
             ViewBag.LastModified = DateTime.Today.AddYears(-1);
+
+
+
+            // Do it this way if you need to have nothing selected as default
+            // var query = repository.Religions.Select(r => new { r.ReligionId, r.Name });
+            //ViewBag.Religions = new SelectList(query.AsEnumerable(), "ReligionId", "Name", 0);
+
             ViewBag.Religions = repository.Religions.Select(r =>
                                  new SelectListItem
                                  {
@@ -65,7 +90,7 @@ namespace IS_Proj_HIT.Controllers
         }
 
         
-
+        // Click Create button on Add Patient page
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddPatient(Patient model)
@@ -86,6 +111,8 @@ namespace IS_Proj_HIT.Controllers
             }
             return View();
         }
+
+       
 
         public IActionResult DeletePatient(string id)
         {

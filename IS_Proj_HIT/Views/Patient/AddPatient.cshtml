@@ -1,6 +1,8 @@
 ﻿@model IS_Proj_HIT.Models.Patient
+@*@model IS_Proj_HIT.Models.ViewModel.AddPatientsAndEmployment*@
 <link rel="stylesheet" href="~/css/forms.css" />
 <div class="bg-primary m-1 p-1 text-white"><h4>Add Patient</h4></div>
+@**@
 <form method="post" id="patient" name="patient" asp-action="AddPatient">
     <div class="container" asp-validation-summary="All"></div>
     <div class="text-center shadebox">
@@ -65,7 +67,7 @@
     <div class="row">
         <div class="col-sm-4">
             <label>SSN</label><br />
-            <input asp-for="@Model.Ssn" name="Ssn" type="password" maxlength="9" />
+            <input asp-for="@Model.Ssn" name="Ssn" maxlength="9" />
         </div>
         <div class="col-sm-4">
             <label>DOB</label><br />
@@ -83,6 +85,7 @@
         </div>
         <div class="col-sm-4">
             <label>Religion</label>
+            @*@Html.DropDownList("ReligionId", (SelectList)ViewBag.Religions, "--Select One--")*@
             <select class="form-control dropdowns" asp-for="@Model.ReligionId" asp-items="ViewBag.Religions"></select>
         </div>
     </div>
@@ -99,8 +102,8 @@
 
     <div class="row">
         <div class="col-md-10">
-            <label>Employment</label>
             <label>Employer Name -- Occupation</label>
+            @*@Html.DropDownList("EmploymentId", (SelectList)ViewBag.Employment, "--Select One--")*@
             <select class="form-control dropdowns" asp-for="@Model.EmploymentId" asp-items="ViewBag.Employment"></select>
         </div>
     </div>

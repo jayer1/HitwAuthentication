@@ -56,5 +56,6 @@ namespace IS_Proj_HIT.Models
         public virtual ICollection<PatientMilitaryService> PatientMilitaryService { get; set; }
         public virtual ICollection<PatientRace> PatientRace { get; set; }
         public virtual ICollection<PatientRestrictions> PatientRestrictions { get; set; }
+
     }
 }

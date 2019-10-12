@@ -1,5 +1,5 @@
-﻿@using IS_Proj_HIT.Models
-@model IEnumerable<Patient>
+﻿@using IS_Proj_HIT.Models.ViewModels
+@model ListPatientsViewModel
 
 
 <div class="bg-primary m-1 p-1 text-white"><h4>Patient Listing</h4></div>
@@ -7,24 +7,12 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="AddPatient">Add Patient</a></li>
-            <li><a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="AddEmployment">Add Employee</a></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="AddEmployment">Add Employment</a></li>
         </ul>
     </div>
 </nav>
 
 
-<div class="navbar-collapse collapse d-sm-inline-flex">
-    <ul class="navbar-nav nav">
-            <li></li>
-            <li></li>
-    </ul>
-</div>
-@if (Model.Count() == 1)
-{
-    <p>There are no patients</p>
-}
-else
-{
     <table class="table">
         <thead>
             <tr>
@@ -36,22 +24,23 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (Patient patient in Model)
+            @foreach (var patient in Model.Patients)
             {
-            <tr>
+                <tr>
 
-                <td>@patient.Mrn</td>
-                <td>@patient.FirstName</td>
-                <td>@patient.MiddleName</td>
-                <td>@patient.LastName</td>
-                <td>@patient.Dob.ToShortDateString()</td>
-                @*<td>@Html.ActionLink("Edit", "Edit", new { id = patient.Mrn })</td>*@
-                <td><a asp-action="Edit" asp-route-id="@patient.Mrn">Edit</a></td>
-                <td><a asp-action="DeletePatient" asp-route-id="@patient.Mrn">Delete</a></td>
-            </tr>
+                    <td>@patient.Mrn</td>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.MiddleName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.Dob.ToShortDateString()</td>
+                    <td><a asp-action="Edit" asp-route-id="@patient.Mrn">Edit</a></td>
+                    <td><a asp-action="DeletePatient" asp-route-id="@patient.Mrn">Delete</a></td>
+                </tr>
             }
+                
         </tbody>
     </table>
+    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" class="btn-group" pull-right m-1></div>
 
-}
+
 <hr />

@@ -74,6 +74,10 @@ namespace IS_Proj_HIT
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                name: "pagination",
+                    template: "Patients/Page{patientPage}",
+                    defaults: new { Controller = "Patient", action = "Index" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
