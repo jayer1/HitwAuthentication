@@ -35,20 +35,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Ethnicity">Ethnicity</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="listsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-users"></i> Prepopulated Tables
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="listsDropdown">
+                                <a class="dropdown-item" asp-controller="Home" asp-action="Ethnicity"><i class="fas fa-sign-out-alt"></i>Ethnicity</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="Gender"><i class="fas fa-sign-out-alt"></i>Gender</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="Discharge"><i class="far fa-address-card"></i>Discharge</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="Sex"><i class="fas fa-sign-in-alt"></i>Sex</a>
+
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gender">Gender</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Discharge">Discharge</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Sex">Sex</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Index">Patients</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="patientsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-users"></i> Patients
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="patientsDropdown">
+                                <a class="dropdown-item" asp-controller="Patient" asp-action="Index"><i class="fas fa-sign-out-alt"></i>List</a>
+                                <a class="dropdown-item" asp-controller="Patient" asp-action="AddPatient"><i class="far fa-address-card"></i> Add Patient</a>
+                                <a class="dropdown-item" asp-controller="Patient" asp-action="AddEmployment"><i class="fas fa-sign-in-alt"></i>Add Employment</a>
+
+                            </div>
                         </li>
                     </ul>
                 </div>

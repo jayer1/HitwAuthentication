@@ -7,21 +7,27 @@ using IS_Proj_HIT.Models.ViewModels;
 using isprojectHiT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace IS_Proj_HIT.Controllers
 {
     public class PatientController : Controller
     {
         private IWCTCHealthSystemRepository repository;
-
-        public int PageSize = 4;
+        public int PageSize = 8;
         public PatientController(IWCTCHealthSystemRepository repo) => repository = repo;
+
+
 
         //public IActionResult Index() => View(repository.Patients);
 
         public ViewResult Index(int patientPage = 1) => View(new ListPatientsViewModel
         {
             Patients = repository.Patients
+                .Include(p => p.Religion)
+                .Include(p=>p.Gender)
+                .Include(p=>p.Ethnicity)
+                .Include(p=>p.MaritalStatus)
                 .OrderBy(p => p.FirstName)
                 .Skip((patientPage - 1) * PageSize)
                 .Take(PageSize),
@@ -32,6 +38,9 @@ namespace IS_Proj_HIT.Controllers
                 TotalItems = repository.Patients.Count()
             }
         });
+
+
+
 
 
         public IActionResult AddPatient() {

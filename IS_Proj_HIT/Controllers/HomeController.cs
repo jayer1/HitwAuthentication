@@ -16,6 +16,7 @@ namespace IS_Proj_HIT.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
