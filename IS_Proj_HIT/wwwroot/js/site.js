@@ -194,7 +194,7 @@ $(function(){
             },
             PhoneNumber: {
                 required: "Please provide a phone number",
-                number: "Must be a 10 digit number starting with 1",
+                number: "Must be a 10 digit number",
                 minlength: "Too short - make it a 10 digit number",
                 maxlength: "Too long - make it a 10 digit number"
             },
