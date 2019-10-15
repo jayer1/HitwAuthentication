@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using IS_Proj_HIT.Models;
@@ -8,6 +9,8 @@ using isprojectHiT.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
+using System.Configuration;
 
 namespace IS_Proj_HIT.Controllers
 {
@@ -17,17 +20,13 @@ namespace IS_Proj_HIT.Controllers
         public int PageSize = 8;
         public PatientController(IWCTCHealthSystemRepository repo) => repository = repo;
 
-
-
-        //public IActionResult Index() => View(repository.Patients);
-
-        public ViewResult Index(int patientPage = 1) => View(new ListPatientsViewModel
+        public ViewResult Index(string firstname, int patientPage = 1) => View(new ListPatientsViewModel
         {
             Patients = repository.Patients
                 .Include(p => p.Religion)
-                .Include(p=>p.Gender)
-                .Include(p=>p.Ethnicity)
-                .Include(p=>p.MaritalStatus)
+                .Include(p => p.Gender)
+                .Include(p => p.Ethnicity)
+                .Include(p => p.MaritalStatus)
                 .OrderBy(p => p.FirstName)
                 .Skip((patientPage - 1) * PageSize)
                 .Take(PageSize),
@@ -40,14 +39,21 @@ namespace IS_Proj_HIT.Controllers
         });
 
 
+        
 
+            public IActionResult AddPatient() {
 
+            // This should work for running the stored procedure
+            // Also put this in the MRN field in PatientFormFields - value="@(ViewBag.MRN ?? String.Empty)"
+            /*using (var context = new WCTCHealthSystemContext())
+            {
+                var data = context.Patient.FromSql("EXECUTE dbo.GetNextMRN");
+                ViewBag.MRN = data;
 
-        public IActionResult AddPatient() {
+            }*/
 
             ViewBag.LastModified = DateTime.Today.AddYears(-1);
-
-
+           
 
             // Do it this way if you need to have nothing selected as default
             // var query = repository.Religions.Select(r => new { r.ReligionId, r.Name });

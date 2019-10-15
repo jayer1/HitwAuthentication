@@ -30,6 +30,13 @@ a.navbar-brand {
     border: 1px solid black
 }
 
+#special{
+    column-width: 250px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
